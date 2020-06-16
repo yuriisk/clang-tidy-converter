@@ -1,0 +1,1 @@
+from .code_climate_formatter import CodeClimateFormatter
