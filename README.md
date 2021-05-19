@@ -13,6 +13,7 @@ Reads Clang-Tidy output from `STDIN` and prints Code Climate JSON to `STDOUT`.
 * `-h, --help` - show help message and exit.
 * `-r PROJECT_ROOT, --project_root PROJECT_ROOT` - output file paths relative to `PROJECT_ROOT`. E.g. Clang-Tidy outputs '/home/user/projects/A/src/main.cpp' file path and `PROJECT_ROOT` is set to '/home/user/projects/A' then Code Climate JSON mentions the file as 'src/main.cpp'.
 * `-l, --use_location_lines` - use _line-based_ locations instead of _position-based_ as defined in _Locations_ section of Code Climate specification.
+* `-j, --as_json_array` - output as JSON array instead of ending each issue with \0.
 
 ## Example
 

@@ -13,10 +13,10 @@ class CodeClimateFormatter:
         pass
 
     def format(self, messages, args):
-        formatted_string = ""
-        for message in messages:
-            formatted_string += json.dumps(self._format_message(message, args), indent=2) + '\0\n'
-        return formatted_string
+        if args.as_json_array:
+            return json.dumps([self._format_message(msg, args) for msg in messages], indent=2)
+        else:
+            return ''.join(json.dumps(self._format_message(msg, args), indent=2) + '\0\n' for msg in messages)
 
     def _format_message(self, message, args):
         return {
