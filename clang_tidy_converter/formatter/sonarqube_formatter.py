@@ -27,13 +27,20 @@ class SonarQubeFormatter:
         }
 
     def _format_location(self, message, args):
+        range = {
+            "startLine": message.line,
+            "endLine": message.line,
+        }
+        if message.column > 0:
+            range["startColumn"] = message.column - 1
+            range["endColumn"] = message.column
+        else:
+            range["startColumn"] = 0
+            range["endColumn"] = 1
         return {
             "message": message.message,
             "filePath": message.filepath,
-            "textRange": {
-                "startLine": message.line,
-                "startColumn": message.column,
-            },
+            "textRange": range,
         }
 
     def _level_to_severity(self, level, default="BLOCKER"):
