@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from .formatter import CodeClimateFormatter, HTMLReportFormatter
+from .formatter import CodeClimateFormatter, HTMLReportFormatter, SonarQubeFormatter, SarifFormatter
 from .parser import ClangTidyParser
 from argparse import ArgumentParser
 import os
@@ -20,6 +20,10 @@ def create_argparser():
 
     html = sub.add_parser("html", help="HTML report")
     html.add_argument('-s', '--software_name', default='', help='software name to display in generated report')
+
+    sq = sub.add_parser("sq", help="SonarQube JSON")
+    sarif = sub.add_parser("sarif", help="SARIF JSON")
+
     return p
 
 def main(args):
@@ -31,6 +35,10 @@ def main(args):
 
     if args.output_format == 'cc':
         formatter = CodeClimateFormatter()
+    elif args.output_format == 'sarif':
+        formatter = SarifFormatter()
+    elif args.output_format == 'sq':
+        formatter = SonarQubeFormatter()
     else:
         formatter = HTMLReportFormatter()
 
